@@ -1,7 +1,13 @@
+<script>
+	import Grid from './Grid.svelte';
+</script>
+
 <div class="game">
 	<div class="info" />
 
-	<div class="grid-container" />
+	<div class="grid-container">
+		<Grid />
+	</div>
 
 	<div class="info" />
 </div>
@@ -13,17 +19,18 @@
 		justify-content: center;
 		align-items: center;
 		height: 100%;
+		font-size: min(1vmin, 0.5rem);
 	}
 
 	.info {
-		width: 80vmin;
-		height: 10vmin;
+		width: 80em;
+		height: 10em;
 		background-color: rebeccapurple;
 	}
 
 	.grid-container {
-		width: 80vmin;
-		height: 80vmin;
+		width: 80em;
+		height: 80em;
 		background-color: teal;
 	}
 </style>

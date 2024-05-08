@@ -1,7 +1,9 @@
 <script lang="ts">
+	import Found from './Found.svelte';
 	import Grid from './Grid.svelte';
 	import { levels } from './levelts';
 	import type { Level } from './levelts';
+	import { shuffle } from './utils';
 
 	const level = levels[0];
 
@@ -23,7 +25,7 @@
 		}
 
 		pairs.push(...pairs);
-		return pairs;
+		return shuffle(pairs);
 	}
 </script>
 
@@ -31,10 +33,18 @@
 	<div class="info" />
 
 	<div class="grid-container">
-		<Grid {grid} />
+		<Grid
+			{grid}
+			{found}
+			on:found={(e) => {
+				found = [...found, e.detail.emoji];
+			}}
+		/>
 	</div>
 
-	<div class="info" />
+	<div class="info">
+		<Found {found} />
+	</div>
 </div>
 
 <style>

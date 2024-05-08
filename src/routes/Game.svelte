@@ -1,12 +1,37 @@
-<script>
+<script lang="ts">
 	import Grid from './Grid.svelte';
+	import { levels } from './levelts';
+	import type { Level } from './levelts';
+
+	const level = levels[0];
+
+	let size: number = level.size;
+	let grid: string[] = create_grid(level);
+	let found: string[] = [];
+
+	function create_grid(level: Level): string[] {
+		const copy = level.emojis.slice();
+		const pairs: string[] = [];
+
+		for (let i = 0; i < (level.size * level.size) / 2; i++) {
+			const index = Math.floor(Math.random() * copy.length);
+			const emoji = copy[index];
+
+			// remove emoji
+			copy.splice(index, 1);
+			pairs.push(emoji);
+		}
+
+		pairs.push(...pairs);
+		return pairs;
+	}
 </script>
 
 <div class="game">
 	<div class="info" />
 
 	<div class="grid-container">
-		<Grid />
+		<Grid {grid} />
 	</div>
 
 	<div class="info" />
